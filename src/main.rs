@@ -64,7 +64,7 @@ impl  Image {
 
         for j in 0..self.height {
             for i in 0..self.width {
-                let index: usize = (self.width * 3 * j + 3 * i) as usize;
+                let index: usize = (self.width * 3 * (self.height - j - 1) + 3 * i) as usize;
                 contents.push(self.data[index+0]);
                 contents.push(self.data[index+1]);
                 contents.push(self.data[index+2]);
@@ -79,7 +79,7 @@ impl  Image {
 }
 
 fn parse_pixel(pixel: u16, r: &mut u8, g: &mut u8, b: &mut u8) {
-    *r = (((pixel >> 1) & 0b1111) << 3) as u8;
+    *b = (((pixel >> 1) & 0b1111) << 3) as u8;
     *g = (((pixel >> 6) & 0b1111) << 3) as u8;
     *r = (((pixel >> 11) & 0b1111) << 3) as u8;
 }
@@ -167,3 +167,4 @@ fn main() {
         return
     }
 }
+
